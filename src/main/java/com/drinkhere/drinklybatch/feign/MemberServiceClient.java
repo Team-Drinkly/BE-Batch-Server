@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "member-service", url = "http://member-service/api/v1/member/m")
+@FeignClient(name = "member-service", url = "https://drinkly.store/api/v1/member/m")
 public interface MemberServiceClient {
 
     /**
