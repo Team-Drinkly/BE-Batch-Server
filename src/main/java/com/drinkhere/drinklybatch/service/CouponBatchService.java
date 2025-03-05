@@ -1,6 +1,7 @@
 package com.drinkhere.drinklybatch.service;
 
 import com.drinkhere.drinklybatch.feign.CouponServiceClient;
+import com.drinkhere.drinklybatch.feign.response.FeignResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,11 +24,11 @@ public class CouponBatchService {
         log.info("🔍 쿠폰 만료 배치 실행 시작");
 
         // 만료된 쿠폰 ID 조회
-        List<Long> expiredCouponIds = couponServiceClient.getExpiredCoupons();
+        FeignResponse<List<Long>> expiredCouponIds = couponServiceClient.getExpiredCoupons();
 
-        if (!expiredCouponIds.isEmpty()) {
+        if (!expiredCouponIds.getPayload().isEmpty()) {
             // 만료 처리 요청
-            couponServiceClient.expireCoupons(expiredCouponIds);
+            couponServiceClient.expireCoupons(expiredCouponIds.getPayload());
             log.info("쿠폰 만료 처리 완료: {}", expiredCouponIds);
         } else {
             log.info("만료된 쿠폰 없음");

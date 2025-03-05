@@ -4,13 +4,14 @@ server:
 spring:
   application:
     name: batch-service
-
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/drinkly?serverTimezone=Asia/Seoul&characterEncoding=utf8
-    username: root
-    password: 1234
+    url: jdbc:mysql://drinkly-database-mysql.cp0080oqi0ly.ap-northeast-2.rds.amazonaws.com:3306/drinkly?serverTimezone=Asia/Seoul&characterEncoding=utf8
+    username: admin
+    password: 1Va7x0TMinlqYwlMwoZd
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
 
@@ -18,7 +19,7 @@ logging:
   level:
     org.springframework: INFO
 
-# Feign Client Timeout ??
+# Feign Client Timeout
 feign:
   client:
     config:
